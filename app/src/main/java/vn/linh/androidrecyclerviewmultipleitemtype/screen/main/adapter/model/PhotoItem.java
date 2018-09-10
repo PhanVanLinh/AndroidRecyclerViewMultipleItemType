@@ -6,11 +6,6 @@ public class PhotoItem implements BaseRecyclerView.BaseModel {
     private String title;
     private String message;
 
-    @Override
-    public int getType() {
-        return PhotoItemType.PHOTO;
-    }
-
     public PhotoItem(String title, String message) {
         this.title = title;
         this.message = message;
