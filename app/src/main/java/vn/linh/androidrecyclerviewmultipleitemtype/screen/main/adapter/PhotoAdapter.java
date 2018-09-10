@@ -1,6 +1,5 @@
 package vn.linh.androidrecyclerviewmultipleitemtype.screen.main.adapter;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;
 import android.view.View;
@@ -8,53 +7,60 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 import vn.linh.androidrecyclerviewmultipleitemtype.R;
-import vn.linh.androidrecyclerviewmultipleitemtype.base.BaseRecyclerView;
+import vn.linh.androidrecyclerviewmultipleitemtype.base.BaseListAdapter;
+import vn.linh.androidrecyclerviewmultipleitemtype.base.BaseViewHolder;
+import vn.linh.androidrecyclerviewmultipleitemtype.base.RecyclerViewItem;
 import vn.linh.androidrecyclerviewmultipleitemtype.screen.main.adapter.model.HeaderItem;
 import vn.linh.androidrecyclerviewmultipleitemtype.screen.main.adapter.model.PhotoItem;
 import vn.linh.androidrecyclerviewmultipleitemtype.screen.main.adapter.model.ProgressItem;
 
-public class PhotoAdapter extends BaseRecyclerView.BaseListAdapter {
+public class PhotoAdapter extends BaseListAdapter {
 
-    protected PhotoAdapter(Context context,
-            @NonNull DiffUtil.ItemCallback<BaseRecyclerView.BaseModel> diffCallback) {
-        super(context, diffCallback);
+    protected PhotoAdapter(@NonNull DiffUtil.ItemCallback<RecyclerViewItem> diffCallback) {
+        super(diffCallback);
     }
 
     @Override
-    public List<Class> getAllModels() {
-        return new ArrayList<Class>() {{
-            add(PhotoItem.class);
-            add(ProgressItem.class);
+    protected List<Class<? extends RecyclerViewItem>> getAllModelTypes() {
+        return new ArrayList<Class<? extends RecyclerViewItem>>() {{
             add(HeaderItem.class);
+            add(PhotoItem.class);
         }};
     }
 
-    @NonNull
     @Override
-    public BaseRecyclerView.BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
-            int viewType) {
-        if (viewType == indexOfModel(PhotoItem.class)) {
-            View view = layoutInflater.inflate(R.layout.item_header, parent, false);
-            return new HeaderViewHolder(view);
+    public BaseViewHolder<? extends RecyclerViewItem> onCreateViewHolder(@NonNull ViewGroup parent,
+            Class<?> modelType) {
+        if (modelType == HeaderItem.class) {
+            return new HeaderViewHolder(inflateView(R.layout.item_header, parent));
         }
-        if (viewType == indexOfModel(PhotoItem.class)) {
-            View view = layoutInflater.inflate(R.layout.item_photo, parent, false);
-            return new ItemViewHolder(view);
+        if (modelType == PhotoItem.class) {
+            return new ItemViewHolder(inflateView(R.layout.item_photo, parent));
         }
         return null;
     }
 
-    class HeaderViewHolder extends BaseRecyclerView.BaseViewHolder<HeaderItem> {
+    class HeaderViewHolder extends BaseViewHolder<HeaderItem> {
 
-        public HeaderViewHolder(@NonNull View itemView) {
+        HeaderViewHolder(@NonNull View itemView) {
             super(itemView);
+        }
+
+        @Override
+        public void bind(HeaderItem item) {
+            super.bind(item);
         }
     }
 
-    class ItemViewHolder extends BaseRecyclerView.BaseViewHolder<ProgressItem> {
+    class ItemViewHolder extends BaseViewHolder<ProgressItem> {
 
-        public ItemViewHolder(@NonNull View itemView) {
+        ItemViewHolder(@NonNull View itemView) {
             super(itemView);
+        }
+
+        @Override
+        public void bind(ProgressItem item) {
+            super.bind(item);
         }
     }
 }

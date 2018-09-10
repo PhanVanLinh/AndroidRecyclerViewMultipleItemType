@@ -1,8 +1,8 @@
 package vn.linh.androidrecyclerviewmultipleitemtype.screen.main.adapter.model;
 
-import vn.linh.androidrecyclerviewmultipleitemtype.base.BaseRecyclerView;
+import vn.linh.androidrecyclerviewmultipleitemtype.base.RecyclerViewItem;
 
-public class PhotoItem implements BaseRecyclerView.BaseModel {
+public class PhotoItem implements RecyclerViewItem {
     private String title;
     private String message;
 

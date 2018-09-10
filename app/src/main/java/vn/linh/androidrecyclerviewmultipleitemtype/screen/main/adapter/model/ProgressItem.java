@@ -1,7 +1,7 @@
 package vn.linh.androidrecyclerviewmultipleitemtype.screen.main.adapter.model;
 
-import vn.linh.androidrecyclerviewmultipleitemtype.base.BaseRecyclerView;
+import vn.linh.androidrecyclerviewmultipleitemtype.base.RecyclerViewItem;
 
-public class ProgressItem implements BaseRecyclerView.BaseModel {
+public class ProgressItem implements RecyclerViewItem {
 }
 
