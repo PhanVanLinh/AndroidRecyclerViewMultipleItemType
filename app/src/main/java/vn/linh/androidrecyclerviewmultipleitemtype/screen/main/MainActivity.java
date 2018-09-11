@@ -5,47 +5,44 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import java.util.ArrayList;
 import vn.linh.androidrecyclerviewmultipleitemtype.R;
+import vn.linh.androidrecyclerviewmultipleitemtype.base.RecyclerViewItem;
+import vn.linh.androidrecyclerviewmultipleitemtype.screen.main.adapter.PhotoAdapterMultiple;
+import vn.linh.androidrecyclerviewmultipleitemtype.screen.main.adapter.model.PhotoItem;
+import vn.linh.androidrecyclerviewmultipleitemtype.screen.main.adapter.model.SectionItem;
 
-public class MainActivity extends AppCompatActivity implements MultipleItemTypeAdapter.ItemClickListener{
-    private RecyclerView mRecyclerView;
-    private MultipleItemTypeAdapter adapter;
+public class MainActivity extends AppCompatActivity {
+    private PhotoAdapterMultiple photoAdapter;
+    private RecyclerView recyclerViewPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getSupportActionBar().setTitle("Multiple PhotoItem Type Recycler List");
+        photoAdapter = new PhotoAdapterMultiple();
+        recyclerViewPhoto = findViewById(R.id.recycler_view_photo);
+        recyclerViewPhoto.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewPhoto.setAdapter(photoAdapter);
+        recyclerViewPhoto.addItemDecoration(
+                new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-
-        ArrayList<Item> data = new ArrayList<>();
-        data.add(new Item("a", "b"));
-        data.add(new Item("c", "b"));
-        data.add(new Item("d", "b"));
-        data.add(new Item("e", "b"));
-        data.add(new Item("f", "b"));
-        data.add(new Item("g", "b"));
-        data.add(new Item("h", "b"));
-        data.add(new Item("j", "b"));
-        data.add(new Item("k", "b"));
-        data.add(new Item("l", "b"));
-        data.add(new Item("m", "b"));
-
-        // set up the RecyclerView
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new MultipleItemTypeAdapter(this, data.toArray(new Item[data.size()]));
-        adapter.setClickListener(this);
-        mRecyclerView.setAdapter(adapter);
-
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-    }
-
-    @Override
-    public void onItemClick(View view, int position) {
-
+        ArrayList<RecyclerViewItem> data = new ArrayList<>();
+        data.add(new SectionItem("Section 1"));
+        data.add(new PhotoItem(R.drawable.ic_launcher_background, "image 1"));
+        data.add(new PhotoItem(R.drawable.ic_launcher_background, "image 2"));
+        data.add(new PhotoItem(R.drawable.ic_launcher_background, "image 2"));
+        data.add(new PhotoItem(R.drawable.ic_launcher_background, "image 2"));
+        data.add(new PhotoItem(R.drawable.ic_launcher_background, "image 2"));
+        data.add(new PhotoItem(R.drawable.ic_launcher_background, "image 2"));
+        data.add(new PhotoItem(R.drawable.ic_launcher_background, "image 2"));
+        data.add(new SectionItem("Section 1"));
+        data.add(new PhotoItem(R.drawable.ic_launcher_background, "image 2"));
+        data.add(new PhotoItem(R.drawable.ic_launcher_background, "image 2"));
+        data.add(new PhotoItem(R.drawable.ic_launcher_background, "image 2"));
+        data.add(new PhotoItem(R.drawable.ic_launcher_background, "image 2"));
+        data.add(new PhotoItem(R.drawable.ic_launcher_background, "image 2"));
+        photoAdapter.submitList(data);
     }
 }

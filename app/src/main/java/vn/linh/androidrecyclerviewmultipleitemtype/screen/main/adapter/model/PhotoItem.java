@@ -3,27 +3,27 @@ package vn.linh.androidrecyclerviewmultipleitemtype.screen.main.adapter.model;
 import vn.linh.androidrecyclerviewmultipleitemtype.base.RecyclerViewItem;
 
 public class PhotoItem implements RecyclerViewItem {
-    private String title;
-    private String message;
+    private int image;
+    private String description;
 
-    public PhotoItem(String title, String message) {
-        this.title = title;
-        this.message = message;
+    public PhotoItem(int image, String description) {
+        this.image = image;
+        this.description = description;
     }
 
-    public String getTitle() {
-        return title;
+    public int getImage() {
+        return image;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setImage(int image) {
+        this.image = image;
     }
 
-    public String getMessage() {
-        return message;
+    public String getDescription() {
+        return description;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
